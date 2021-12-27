@@ -1,0 +1,65 @@
+{
+	"info": {
+		"_postman_id": "3156cf37-1cc0-4e7a-99a6-aa740a5ba154",
+		"name": "Microservices",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "k8s",
+			"item": [
+				{
+					"name": "Brands",
+					"item": [
+						{
+							"name": "GetAll",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:{{brandservice-src-port}}/api/brands",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "{{brandservice-src-port}}",
+									"path": [
+										"api",
+										"brands"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "brandservice-srv-port",
+			"value": "31293"
+		}
+	]
+}
