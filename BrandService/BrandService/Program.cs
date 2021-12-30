@@ -7,7 +7,16 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
-builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseInMemoryDatabase("InMemory"));
+if (builder.Environment.IsDevelopment())
+{
+    builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseInMemoryDatabase("InMemory"));
+}
+else
+{
+    builder.Services.AddDbContext<ApplicationDbContext>(options => 
+        options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+}
+
 builder.Services.AddScoped<IApplicationDbContext>(x => x.GetRequiredService<ApplicationDbContext>());
 builder.Services.AddScoped<IBrandRepository, BrandRepository>();
 builder.Services.AddHttpClient<IProductClient, HttpProductClient>();
@@ -32,6 +41,6 @@ app.UseAuthorization();
 
 app.MapControllers();
 
-BrandSeeder.SeedData(app);
+BrandSeeder.SeedData(app, app.Environment.IsDevelopment());
 
 app.Run();
